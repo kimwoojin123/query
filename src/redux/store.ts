@@ -1,11 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, PERSIST } from 'redux-persist';
+import { persistStore } from 'redux-persist';
 import counterReducer from './reducer/countslice.reducer';
+import persistReducer from './reducerCombine';
 
 const store = configureStore({
-	reducer: {
-		counter: counterReducer,
-	},
+	reducer: persistReducer,
 });
 
 const persistor = persistStore(store);

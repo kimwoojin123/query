@@ -14,10 +14,14 @@ const client = new QueryClient({});
 
 root.render(
 	<Provider store={store}>
-		<QueryClientProvider client={client}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</QueryClientProvider>
+		<PersistGate loading={null} persistor={persistor}>
+			<QueryClientProvider client={client}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</QueryClientProvider>
+		</PersistGate>
 	</Provider>,
 );
+
+reportWebVitals();
