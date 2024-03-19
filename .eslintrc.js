@@ -55,7 +55,7 @@ module.exports = {
 		'@typescript-eslint/prefer-nullish-coalescing': 0,
 		'@typescript-eslint/prefer-rest-params': 0,
 		'@typescript-eslint/naming-convention': 0,
-
+        '@typescript-eslint/explicit-function-return-type': 'off',
 		// tez
 		'react/no-unknown-property': 0,
 	},
