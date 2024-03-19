@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"@": ["./src"],
+			"@/*": ["./src/*"],
+			"@include": ["./src/include"],
+			"@include/*": ["./src/include/*"],
+			"@module": ["./src/module"],
+			"@module/*": ["./src/module/*"],
+			"@components": ["./src/components"],
+			"@components/*": ["./src/components/*"],
+			"@redux": ["./src/redux"],
+			"@redux/*": ["./src/redux/*"],
+			"@reducers": ["./src/redux/reducers"],
+			"@reducers/*": ["./src/redux/reducers/*"],
+			"@hooks": ["./src/hooks"],
+			"@hooks/*": ["./src/hooks/*"],
+			"@design": ["./src/design_system"],
+			"@design/*": ["./src/design_system/*"],
+			"@assets": ["./src/assets"],
+			"@assets/*": ["./src/assets/*"],
+			"mixins": ["./src/styles/design_system/mixins"],
+			"design_system": ["./src/styles/design_system"],
+			"@styles": ["./src/styles"],
+			"@styles/*": ["./src/styles/*"],
+			"@pages": ["./src/pages"],
+			"@pages/*": ["./src/pages/*"]
+		}
+	}
+}
