@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore } from 'redux-persist';
+import { persistStore, FLUSH, REGISTER, REHYDRATE, PAUSE, PERSIST, PURGE } from 'redux-persist';
 import counterReducer from './reducer/countslice.reducer';
 import persistReducer from './reducerCombine';
 
 const store = configureStore({
 	reducer: persistReducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+		}),
 });
 
 const persistor = persistStore(store);
