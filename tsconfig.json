@@ -34,5 +34,5 @@
 		"**/*.jsx",
 		"**/*.glb"
 	],
-	"exclude": ["node_modules", "src/assets"]
+	"exclude": ["node_modules", "src/assets", "vite.config.ts", "express-plugin.ts"]
 }
