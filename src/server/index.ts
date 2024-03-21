@@ -1,12 +1,13 @@
 import express from 'express';
-export const app = express();
-app.get('/api/test', (_, res) => res.json({ greeting: 'Hello' }));
+// import { connectDB, closeConnection, client } from 'utils/db';
 
-if (!process.env['VITE']) {
-	const frontendFiles = process.cwd() + '/dist';
-	app.use(express.static(frontendFiles));
-	app.get('/*', (_, res) => {
-		res.send(frontendFiles + '/index.html');
-	});
-	app.listen(process.env['PORT']);
-}
+export const app = express();
+
+app.use(express.json());
+
+app.get('/api/test', (_, res) => res.json({ greeting: 'Hellow' }));
+
+app.post('/api/count', (req, res) => {
+	const { count } = req.body;
+  console.log(count)
+});

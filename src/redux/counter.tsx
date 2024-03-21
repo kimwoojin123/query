@@ -1,12 +1,25 @@
-import React, { ReactNode } from 'react';
+import React, { useEffect, ReactNode } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment } from './reducer/countslice.reducer';
 import { RootState } from './store';
 import { motion } from 'framer-motion';
+import { Button, Tooltip } from '@nextui-org/react';
+import { axiosInstance } from '../axiosSetting';
 
 export default function Counter(): ReactNode {
 	const count = useSelector((state: RootState) => state.counter?.value);
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const sendCount = async () => {
+			try {
+				await axiosInstance('post', '/api/count', { count });
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		sendCount();
+	}, [count]);
 
 	return (
 		<motion.div
@@ -27,13 +40,13 @@ export default function Counter(): ReactNode {
 			}}
 		>
 			<div>
-				<button aria-label="Increment value" onClick={() => dispatch(increment())}>
+				<Button variant="solid" color="primary" size="lg" onClick={() => dispatch(increment())}>
 					Increment
-				</button>
+				</Button>
 				<span>{count}</span>
-				<button aria-label="Decrement value" onClick={() => dispatch(decrement())}>
+				<Button color="primary" onClick={() => dispatch(decrement())}>
 					Decrement
-				</button>
+				</Button>
 			</div>
 		</motion.div>
 	);
