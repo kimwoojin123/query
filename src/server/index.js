@@ -1,10 +1,10 @@
 import express from 'express';
-import { MongoClient, ServerApiVersion } from 'mongodb';
+import { MongoClient, ServerApiVersion, ObjectId } from 'mongodb';
 import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const uri = 'mongodb+srv://kimwoojin:dnwls12@kimcluster.vi2fpad.mongodb.net/?retryWrites=true&w=majority'
+const uri = 'mongodb+srv://kimwoojin:dnwls12@kimcluster.vi2fpad.mongodb.net/?retryWrites=true&w=majority';
 
 const client = new MongoClient(uri, {
 	serverApi: {
@@ -47,12 +47,17 @@ app.post('/api/count', async (req, res) => {
 		const { count } = req.body;
 		console.log(count);
 
-		// MongoDB에 연결 후 count 값을 저장
-		const db = client.db('test'); // 데이터베이스 선택
-		const collection = db.collection('count'); // 컬렉션 선택
-		await collection.insertOne({ count }); // count 값을 컬렉션에 저장
+		const db = client.db('test');
+		const collection = db.collection('count');
 
-		res.status(200).json({ message: 'Count saved successfully' });
+		await collection.updateOne(
+			{ _id: new ObjectId('65fbc708bd2804d1f197c54a') },
+			{ $inc: { count: count } }, // count 값을 더합니다.
+			{ upsert: false }, // upsert 옵션을 false로 설정하여 문서가 없으면 새로 생성하지 않습니다.
+		);
+
+		const updatedDocument = await collection.findOne({ _id: new ObjectId('65fbc708bd2804d1f197c54a') });
+		res.status(200).json({ message: 'Count saved successfully', updatedCount: updatedDocument.count });
 	} catch (error) {
 		console.error('Error saving count to MongoDB:', error);
 		res.status(500).json({ message: 'Internal server error' });

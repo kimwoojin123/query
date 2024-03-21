@@ -30,7 +30,7 @@ module.exports = {
 		/**
 		 * Warn Rules
 		 */
-        "react/react-in-jsx-scope": "off",
+		'react/react-in-jsx-scope': 'off',
 		'@typescript-eslint/explicit-function-return-type': ['warn', { allowExpressions: true }],
 		'@typescript-eslint/prefer-optional-chain': 'warn',
 		'@typescript-eslint/restrict-template-expressions': 0,
@@ -55,7 +55,7 @@ module.exports = {
 		'@typescript-eslint/prefer-nullish-coalescing': 0,
 		'@typescript-eslint/prefer-rest-params': 0,
 		'@typescript-eslint/naming-convention': 0,
-        '@typescript-eslint/explicit-function-return-type': 'off',
+		'@typescript-eslint/explicit-function-return-type': 'off',
 		// tez
 		'react/no-unknown-property': 0,
 	},

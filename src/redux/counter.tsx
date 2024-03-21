@@ -1,4 +1,4 @@
-import React, { useEffect, ReactNode } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { decrement, increment } from './reducer/countslice.reducer';
 import { RootState } from './store';
@@ -7,13 +7,17 @@ import { Button, Tooltip } from '@nextui-org/react';
 import { axiosInstance } from '../axiosSetting';
 
 export default function Counter(): ReactNode {
+	const [updateCount, setUpdateCount] = useState(0);
 	const count = useSelector((state: RootState) => state.counter?.value);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const sendCount = async () => {
 			try {
-				await axiosInstance('POST', 'http://localhost:5000/api/count', { count });
+				const response = await axiosInstance('POST', 'http://localhost:5000/api/count', { count });
+				console.log(response);
+				const updatedCount = response.data.updatedCount;
+				setUpdateCount(updatedCount);
 			} catch (err) {
 				console.log(err);
 			}
@@ -48,6 +52,7 @@ export default function Counter(): ReactNode {
 					Decrement
 				</Button>
 			</div>
+			<span>{updateCount}</span>
 		</motion.div>
 	);
 }
