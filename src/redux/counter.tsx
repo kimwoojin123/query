@@ -5,25 +5,27 @@ import { RootState } from './store';
 import { motion } from 'framer-motion';
 import { Button, Tooltip } from '@nextui-org/react';
 import { axiosInstance } from '../axiosSetting';
+import { useQuery } from '@tanstack/react-query';
 
 export default function Counter(): ReactNode {
 	const [updateCount, setUpdateCount] = useState(0);
 	const count = useSelector((state: RootState) => state.counter?.value);
 	const dispatch = useDispatch();
 
+	const { data: response } = useQuery({
+		queryKey: ['count', count],
+		queryFn: async () => {
+			const response = await axiosInstance('POST', 'http://localhost:5000/api/count', { count });
+			return response.data;
+		},
+	});
+
 	useEffect(() => {
-		const sendCount = async () => {
-			try {
-				const response = await axiosInstance('POST', 'http://localhost:5000/api/count', { count });
-				console.log(response);
-				const updatedCount = response.data.updatedCount;
-				setUpdateCount(updatedCount);
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		sendCount();
-	}, [count]);
+		if (response) {
+			const updatedCount = response.updatedCount;
+			setUpdateCount(updatedCount);
+		}
+	}, [response]);
 
 	return (
 		<motion.div
