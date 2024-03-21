@@ -3,7 +3,7 @@ import axios, { Method, AxiosRequestConfig, AxiosResponse } from 'axios';
 const defaultOptions: AxiosRequestConfig = {
 	url: '/',
 	method: 'POST',
-	baseURL: 'http://localhost:5173/',
+	baseURL: 'http://localhost:5000/',
 	data: {},
 	timeout: 60000,
 	maxRedirects: 5,

@@ -13,7 +13,7 @@ export default function Counter(): ReactNode {
 	useEffect(() => {
 		const sendCount = async () => {
 			try {
-				await axiosInstance('post', '/api/count', { count });
+				await axiosInstance('POST', 'http://localhost:5000/api/count', { count });
 			} catch (err) {
 				console.log(err);
 			}
