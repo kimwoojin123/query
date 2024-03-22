@@ -9,7 +9,7 @@ export default function CountModal(): JSX.Element {
 	const { open, close } = useModal();
 	const dispatch = useDispatch();
 	const count = useSelector((state: RootState) => state.counter?.value);
-	const isCountModalOpen = useSelector((state: RootState) => state.modal['countModal']?.isOpen);
+	const isCountModalOpen = useSelector((state: RootState) => state.modal['countModal']);
 
 	useEffect(() => {
 		if (count && count > 10) {
