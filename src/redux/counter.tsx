@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Button, Tooltip } from '@nextui-org/react';
 import { axiosInstance } from '../axiosSetting';
 import { useQuery } from '@tanstack/react-query';
+import CountModal from './countModal';
 
 export default function Counter(): ReactNode {
 	const [updateCount, setUpdateCount] = useState(0);
@@ -18,6 +19,7 @@ export default function Counter(): ReactNode {
 			const response = await axiosInstance('POST', 'http://localhost:5000/api/count', { count });
 			return response.data;
 		},
+		staleTime: 30 * 1000,
 	});
 
 	useEffect(() => {
@@ -36,9 +38,6 @@ export default function Counter(): ReactNode {
 				width: '100vw',
 				height: '100vh',
 				backgroundColor: 'blue',
-				position: 'fixed',
-				top: 0,
-				left: 0,
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
@@ -55,6 +54,7 @@ export default function Counter(): ReactNode {
 				</Button>
 			</div>
 			<span>{updateCount}</span>
+			<CountModal />
 		</motion.div>
 	);
 }
